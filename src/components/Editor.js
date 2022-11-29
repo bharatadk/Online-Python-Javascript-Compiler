@@ -43,9 +43,11 @@ export const Editor = () => {
   const [question, setQuestion] = useState("");
   const [testcases, setTestCases] = useState([]);
   const navigate = useNavigate();
+  const rootURL = "http://bharatadk.pythonanywhere.com";
+
   useEffect(() => {
     const fetchQuestions = async () => {
-      const q1 = await axios.get("/api/questions");
+      const q1 = await axios.get(`${rootURL}/api/questions`);
       const newtextdata = await displayInNewLine(q1.data.message);
       setQuestion(newtextdata);
     };
@@ -72,7 +74,7 @@ export const Editor = () => {
     const payload = { language, code };
     let op;
     try {
-      op = await axios.post("/api/run_test_case", payload);
+      op = await axios.post(`${rootURL}/api/run_test_case`, payload);
       setTestCases(op.data.message);
     } catch {
       console.log("error during postin and featching code");

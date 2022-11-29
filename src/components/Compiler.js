@@ -49,7 +49,7 @@ export const Compiler = () => {
   const [output, setOutput] = useState(">>>");
   const [darkTextArea,setDarkTextArea] = useState("")
   const navigate = useNavigate();
-
+  const rootURL = "http://bharatadk.pythonanywhere.com";
   // This function is triggered when the Switch component is toggled
   const changeTheme = async () => {
     await setIsDarkTheme(!isDarkTheme);
@@ -66,7 +66,7 @@ export const Compiler = () => {
     const payload = { language, code };
     let op;
     try {
-      op = await axios.post("/api/run", payload);
+      op = await axios.post(`${rootURL}/api/run`, payload);
       setOutput(op.data.message)
     } catch {
       console.log("error during postin and featching code");
